@@ -1,0 +1,7 @@
+/* CSS untuk membuat foto profil bulat */
+.sidebar-logo, .logo, img {
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  width: 200px !important;
+  height: 200px !important;
+}
