@@ -388,7 +388,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <p>📖 Crawling</p>
+  <p>#📖Crawling</p>
 <p>Awalnya saya ingin mengambil data jurnal dari Springer Nature tanpa harus mencarinya secara manual di website. Untuk itu saya menggunakan API yang disediakan Springer. Supaya bisa mengaksesnya, saya terlebih dahulu menyiapkan API key yang sudah didaftarkan di situs Springer Developer. API key ini nantinya berfungsi seperti kunci masuk agar permintaan saya diterima oleh server Springer.</p>
 <p>Di dalam program, saya menggunakan tiga buah pustaka. Requests saya gunakan untuk mengirim permintaan ke API Springer. Pandas saya gunakan untuk mengubah hasil yang dikembalikan API ke bentuk tabel sehingga lebih mudah diolah. Terakhir, karena saya menjalankan ini di Google Colab, saya juga menggunakan files agar file yang sudah jadi bisa langsung saya unduh ke komputer.</p>
 <p>Setelah itu saya tentukan kata kunci yang ingin saya cari. Saya memilih beberapa topik yang berhubungan dengan data mining, seperti web mining, web usage mining, dan data mining. Kata kunci ini akan saya kirim ke API Springer agar sistem mengembalikan daftar artikel yang relevan.</p>
@@ -406,11 +406,11 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: sprynger in /usr/local/python/3.12.1/lib/python3.12/site-packages (0.4.1)
 Requirement already satisfied: lxml in /usr/local/python/3.12.1/lib/python3.12/site-packages (from sprynger) (6.0.1)
 Requirement already satisfied: requests in /home/codespace/.local/lib/python3.12/site-packages (from sprynger) (2.32.4)
+Requirement already satisfied: urllib3 in /home/codespace/.local/lib/python3.12/site-packages (from sprynger) (2.5.0)
+Requirement already satisfied: platformdirs in /home/codespace/.local/lib/python3.12/site-packages (from sprynger) (4.3.8)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: urllib3 in /home/codespace/.local/lib/python3.12/site-packages (from sprynger) (2.5.0)
-Requirement already satisfied: platformdirs in /home/codespace/.local/lib/python3.12/site-packages (from sprynger) (4.3.8)
-Requirement already satisfied: charset_normalizer&lt;4,&gt;=2 in /home/codespace/.local/lib/python3.12/site-packages (from requests-&gt;sprynger) (3.4.2)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: charset_normalizer&lt;4,&gt;=2 in /home/codespace/.local/lib/python3.12/site-packages (from requests-&gt;sprynger) (3.4.2)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/codespace/.local/lib/python3.12/site-packages (from requests-&gt;sprynger) (3.10)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/codespace/.local/lib/python3.12/site-packages (from requests-&gt;sprynger) (2025.7.9)
 </pre></div>
