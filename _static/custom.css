@@ -1,7 +1,50 @@
-/* CSS untuk membuat foto profil bulat */
-.sidebar-logo, .logo, img {
-  border-radius: 50% !important;
-  object-fit: cover !important;
-  width: 200px !important;
-  height: 200px !important;
+
+/* Styling untuk foto profil di sidebar */
+.sidebar-logo img, .logo img {
+  border-radius: 50%;           /* Bikin lingkaran */
+  object-fit: cover;            /* Potong proporsional */
+  width: 180px;                 /* Ukuran pas di sidebar */
+  height: 180px;
+  margin: 20px auto;            /* Centering */
+  display: block;
+  border: 4px solid #00ADB5;    /* Border biru cyan */
+  box-shadow: 0px 4px 15px rgba(0, 173, 181, 0.5); /* Glow */
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.sidebar-logo img:hover {
+  transform: scale(1.05);       /* Zoom saat hover */
+  box-shadow: 0px 6px 20px rgba(0, 173, 181, 0.8);
+}
+
+/* Sidebar background */
+.bd-sidebar {
+  background: linear-gradient(180deg, #222831, #393E46);
+  color: #EEEEEE;
+}
+
+/* Judul / text di sidebar */
+.bd-sidebar a {
+  color: #EEEEEE;
+  font-weight: 500;
+}
+
+.bd-sidebar a:hover {
+  color: #00ADB5;
+  text-decoration: none;
+}
+
+/* Judul halaman */
+h1, h2, h3 {
+  color: #00ADB5;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Link */
+a {
+  color: #00ADB5;
+}
+
+a:hover {
+  color: #FFD369;
 }
