@@ -1,0 +1,116 @@
+Traceback (most recent call last):
+  File "/home/codespace/.local/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 158, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/asyncio/base_events.py", line 684, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import requests
+from bs4 import BeautifulSoup
+import csv
+import time
+import re
+
+kategori_list = ["nasional", "bisnis", "tekno", "bola", "metro", "dunia"]
+base_rss = "https://rss.tempo.co"
+
+results = []
+
+for kategori in kategori_list:
+    rss_url = f"{base_rss}/{kategori}"
+    print(f"🔎 Ambil RSS: {rss_url}")
+    resp = requests.get(rss_url, headers={"User-Agent": "Mozilla/5.0"})
+    if resp.status_code != 200:
+        print(f"❌ Gagal akses {rss_url}")
+        continue
+
+    soup = BeautifulSoup(resp.content, "xml")
+    items = soup.find_all("item")
+
+    for item in items:
+        link = item.find("link").text
+        judul = item.find("title").text.strip()
+
+        try:
+            berita_id = link.split("/")[-1].split("-")[0]
+        except:
+            berita_id = None
+
+        # Ambil isi berita detail
+        r = requests.get(link, headers={"User-Agent": "Mozilla/5.0"})
+        if r.status_code != 200:
+            continue
+        s = BeautifulSoup(r.text, "html.parser")
+
+        isi_tag = s.find("div", class_="detail-konten")
+        if isi_tag:
+            for tag in isi_tag(["script", "style", "aside", "figure"]):
+                tag.decompose()
+            isi = isi_tag.get_text(" ", strip=True)
+            isi = re.sub(r"Baca juga.*?(?=[A-Z])", "", isi)
+        else:
+            isi = None
+
+        results.append([berita_id, judul, isi, kategori])
+        print(f"✅ {judul} [{kategori}]")
+
+        time.sleep(1)
+
+# Simpan ke CSV
+with open("berita_tempo.csv", "w", newline="", encoding="utf-8") as f:
+    writer = csv.writer(f)
+    writer.writerow(["id_berita", "judul", "isi", "kategori"])
+    writer.writerows(results)
+
+print(f"🎉 Crawling selesai, total berita: {len(results)}, hasil disimpan ke berita_tempo.csv")
+
+------------------
+
+----- stdout -----
+🔎 Ambil RSS: https://rss.tempo.co/nasional
+------------------
+
+[31m---------------------------------------------------------------------------[39m
+[31mFeatureNotFound[39m                           Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[1][39m[32m, line 20[39m
+[32m     17[39m     [38;5;28mprint[39m([33mf[39m[33m"[39m[33m❌ Gagal akses [39m[38;5;132;01m{[39;00mrss_url[38;5;132;01m}[39;00m[33m"[39m)
+[32m     18[39m     [38;5;28;01mcontinue[39;00m
+[32m---> [39m[32m20[39m soup = [43mBeautifulSoup[49m[43m([49m[43mresp[49m[43m.[49m[43mcontent[49m[43m,[49m[43m [49m[33;43m"[39;49m[33;43mxml[39;49m[33;43m"[39;49m[43m)[49m
+[32m     21[39m items = soup.find_all([33m"[39m[33mitem[39m[33m"[39m)
+[32m     23[39m [38;5;28;01mfor[39;00m item [38;5;129;01min[39;00m items:
+
+[36mFile [39m[32m~/.local/lib/python3.12/site-packages/bs4/__init__.py:364[39m, in [36mBeautifulSoup.__init__[39m[34m(self, markup, features, builder, parse_only, from_encoding, exclude_encodings, element_classes, **kwargs)[39m
+[32m    362[39m     possible_builder_class = builder_registry.lookup(*features)
+[32m    363[39m     [38;5;28;01mif[39;00m possible_builder_class [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+[32m--> [39m[32m364[39m         [38;5;28;01mraise[39;00m FeatureNotFound(
+[32m    365[39m             [33m"[39m[33mCouldn[39m[33m'[39m[33mt find a tree builder with the features you [39m[33m"[39m
+[32m    366[39m             [33m"[39m[33mrequested: [39m[38;5;132;01m%s[39;00m[33m. Do you need to install a parser library?[39m[33m"[39m
+[32m    367[39m             % [33m"[39m[33m,[39m[33m"[39m.join(features)
+[32m    368[39m         )
+[32m    369[39m     builder_class = possible_builder_class
+[32m    371[39m [38;5;66;03m# At this point either we have a TreeBuilder instance in[39;00m
+[32m    372[39m [38;5;66;03m# builder, or we have a builder_class that we can instantiate[39;00m
+[32m    373[39m [38;5;66;03m# with the remaining **kwargs.[39;00m
+
+[31mFeatureNotFound[39m: Couldn't find a tree builder with the features you requested: xml. Do you need to install a parser library?
+

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Notebooks with MyST Markdown &#8212; PPW</title>
+    <title>&lt;no title&gt; &#8212; PPW</title>
   
   
   
@@ -57,9 +57,11 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'markdown-notebooks';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Crawling_Page_&_Link';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Crawling and Preprocessing PTA Management" href="Preprocessing.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="Crawling_Berita.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -121,8 +123,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -254,7 +254,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fmarkdown-notebooks.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FCrawling_Page_&_Link.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -284,7 +284,7 @@
       
       
       
-      <li><a href="_sources/markdown-notebooks.md" target="_blank"
+      <li><a href="_sources/Crawling_Page_&_Link.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -294,7 +294,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -368,7 +368,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Notebooks with MyST Markdown</h1>
+    <h1><no title></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -377,11 +377,9 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-cell">An example cell</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-notebook-with-myst-markdown">Create a notebook with MyST Markdown</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quickly-add-yaml-metadata-for-myst-notebooks">Quickly add YAML metadata for MyST Notebooks</a></li>
+                <ul class="simple visible nav section-nav flex-column">
 </ul>
+
             </nav>
         </div>
     </div>
@@ -392,52 +390,120 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="notebooks-with-myst-markdown">
-<h1>Notebooks with MyST Markdown<a class="headerlink" href="#notebooks-with-myst-markdown" title="Link to this heading">#</a></h1>
-<p>Jupyter Book also lets you write text-based notebooks using MyST Markdown.
-See <a class="reference external" href="https://jupyterbook.org/file-types/myst-notebooks.html">the Notebooks with MyST Markdown documentation</a> for more detailed instructions.
-This page shows off a notebook written in MyST Markdown.</p>
-<section id="an-example-cell">
-<h2>An example cell<a class="headerlink" href="#an-example-cell" title="Link to this heading">#</a></h2>
-<p>With MyST Markdown, you can define code cells with a directive like so:</p>
-<div class="cell docutils container">
+  <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bs4</span><span class="w"> </span><span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">urllib.parse</span><span class="w"> </span><span class="kn">import</span> <span class="n">urljoin</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">crawl_website</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># abaikan SSL</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+        <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== HEADING (H1, H2, H3) ===&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">heading</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">([</span><span class="s1">&#39;h1&#39;</span><span class="p">,</span> <span class="s1">&#39;h2&#39;</span><span class="p">,</span> <span class="s1">&#39;h3&#39;</span><span class="p">]):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">heading</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">heading</span><span class="o">.</span><span class="n">get_text</span><span class="p">(</span><span class="n">strip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== LINK ===&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">href</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+            <span class="n">full_url</span> <span class="o">=</span> <span class="n">urljoin</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">link</span><span class="p">[</span><span class="s1">&#39;href&#39;</span><span class="p">])</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;URL: </span><span class="si">{</span><span class="n">full_url</span><span class="si">}</span><span class="s2"> | Teks: </span><span class="si">{</span><span class="n">link</span><span class="o">.</span><span class="n">get_text</span><span class="p">(</span><span class="n">strip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Terjadi kesalahan saat mengakses </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Jalankan untuk Informatika Trunojoyo</span>
+<span class="n">crawl_website</span><span class="p">(</span><span class="s2">&quot;https://himatif.trunojoyo.ac.id/&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/codespace/.local/lib/python3.12/site-packages/urllib3/connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host &#39;himatif.trunojoyo.ac.id&#39;. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== HEADING (H1, H2, H3) ===
+H1: Himpunan Mahasiswa Teknik Informatika
+H3: HIMATIF UTM 2025
+H3: Department HIMATIF 2025
+H3: Katalisator Karya
+H3: Board of Executive
+H3: Entrepreneurship
+H3: Student Welfare
+H3: Creative Branding
+H3: Human Resource
+H3: Tech Issue and Exploration
+H3: Public Relation
+H3: Profil Program Studi Teknik Informatika
+H3: Our Vision &amp; Mission
+H3: PWH
+H3: Achievment!
+H3: Banner 5
+H3: FAQ (Frequently Asked Questions)
+H3: Bagaimana cara membuat surat keterangan aktif kuliah?
+H3: Bagaimana cara mengajukan cuti kuliah?
+H3: Bagaimana tata cara melakukan Kartu Rencana Studi (KRS)?
+H3: Bagaimana cara menyelesaikan permasalahan pada email kampus?
+H3: Bagaimana cara mengajukan Kerja Praktek (KP)?
+H3: Bagaimana langkah-langkah mengajukan MBKM?
+H3: HIMATIF Address
+H3: Social Media
+H3: Click on one of our representatives below to chat on WhatsApp
+
+=== LINK ===
+URL: https://himatif.trunojoyo.ac.id/#main | Teks: Langsung ke konten utama
+URL: https://himatif.trunojoyo.ac.id/ | Teks: 
+URL: https://himatif.trunojoyo.ac.id/ | Teks: Himpunan Mahasiswa Teknik Informatika
+URL: https://himatif.trunojoyo.ac.id/ | Teks: Home
+URL: https://himatif.trunojoyo.ac.id/ | Teks: About
+URL: https://himatif.trunojoyo.ac.id/2013/02/sejarah-himatif_7632.html | Teks: _Sejarah HIMATIF
+URL: https://himatif.trunojoyo.ac.id/2025/02/struktural-kepengurusan-himatif-2025.html | Teks: _Struktur Kepengurusan
+URL: https://himatif.trunojoyo.ac.id/ | Teks: _Logo HIMATIF
+URL: https://himatif.trunojoyo.ac.id/ | Teks: Document
+URL: https://himatif.trunojoyo.ac.id/ | Teks: _HIMATIF
+URL: https://himatif.trunojoyo.ac.id/2025/07/adart-himatif.html | Teks: __AD/ART
+URL: https://himatif.trunojoyo.ac.id/2025/07/garis-besar-haluan-organisasi.html | Teks: __GBHO
+URL: https://himatif.trunojoyo.ac.id/2025/07/peraturan-daerah.html | Teks: __PERDA
+URL: https://himatif.trunojoyo.ac.id/search/label/Akademik | Teks: _Akademik
+URL: https://himatif.trunojoyo.ac.id/ | Teks: Event
+URL: https://himatif.trunojoyo.ac.id/search/label/Booting%20and%20Memory%202025 | Teks: _Booting &amp; Memory 2025
+URL: https://himatif.trunojoyo.ac.id/ | Teks: _Fast
+URL: https://himatif.trunojoyo.ac.id/2025/ | Teks: Archives
+URL: https://drive.usercontent.google.com/u/0/uc?id=1lNtyOQUcMN6S9EvaQaOCctdvuFNcdIIU&amp;export=download | Teks: Media Partner
+URL: https://docs.google.com/forms/d/e/1FAIpQLSeErMIb8NdWNzFn9Nw1hgYM_vslfvrHjIRO10GUwx35m-x1bQ/viewform?usp=dialog | Teks: Katalis Muda
+URL: https://himatif.trunojoyo.ac.id/search/label/Produk?&amp;max-results=8 | Teks: Shop
+URL: https://himatif.trunojoyo.ac.id/p/checkout.html | Teks: Checkout
+URL: javascript:; | Teks: empty cart
+URL: https://himatif.trunojoyo.ac.id/2025/07/logo-katalisator-karya.html | Teks: 
+URL: https://himatif.trunojoyo.ac.id/2025/05/board-of-executive.html | Teks: 
+URL: https://himatif.trunojoyo.ac.id/2025/07/departemen-entrepreneurship.html | Teks: 
+URL: https://himatif.trunojoyo.ac.id/2025/06/departement-student-welfare.html | Teks: 
+URL: https://himatif.trunojoyo.ac.id/2025/06/departemen-creative-branding.html | Teks: 
+URL: https://himatif.trunojoyo.ac.id/2025/05/departement-human-resource.html | Teks: 
+URL: https://himatif.trunojoyo.ac.id/2025/05/departemen-tech-issue-exploration.html | Teks: 
+URL: https://himatif.trunojoyo.ac.id/2025/05/blog-post.html?zx=d1ffcdcb14244076 | Teks: 
+URL: https://www.youtube.com/watch?v=dRI_4EdwcQE | Teks: Open YouTube Video
+URL: https://youtu.be/ma7p0jpEPzs | Teks: Tonton
+URL: https://himatif.trunojoyo.ac.id/youtube.com | Teks: Stay Tuned
+URL: https://himatif.trunojoyo.ac.id/youtube.com | Teks: Stay Tuned
+URL: https://himatif.trunojoyo.ac.id/2025/07/surat-keterangan-aktif-kuliah-body-font.html | Teks: Selengkapnya
+URL: https://himatif.trunojoyo.ac.id/2025/07/pengajuan-cuti-kuliah.html | Teks: Selengkapnya
+URL: https://himatif.trunojoyo.ac.id/2025/07/tata-cara-melakukan-krs.html | Teks: Selengkapnya
+URL: https://himatif.trunojoyo.ac.id/2025/07/langkah-menyelesaikan-email-kampus.html | Teks: Selengkapnya
+URL: https://himatif.trunojoyo.ac.id/2025/07/tata-cara-mengajukan-kerja-praktek-kp.html | Teks: Selengkapnya
+URL: https://himatif.trunojoyo.ac.id/2025/07/langkah-langkah-pengajuan-mbkm-body.html | Teks: Selengkapnya
+URL: https://www.instagram.com/himatifutm/ | Teks: Instagram
+URL: https://www.youtube.com/c/HimatifTrunojoyo | Teks: Youtube
+URL: https://www.tiktok.com/@himatifutm?is_from_webapp=1&amp;sender_device=pc | Teks: Tiktok
+URL: https://www.twitter.com/himatifUTM | Teks: Twitter
+URL: https://himatif.trunojoyo.ac.id/ | Teks: Himpunan Mahasiswa Teknik Informatika
 </pre></div>
 </div>
 </div>
 </div>
-<p>When your book is built, the contents of any <code class="docutils literal notranslate"><span class="pre">{code-cell}</span></code> blocks will be
-executed with your default Jupyter kernel, and their outputs will be displayed
-in-line with the rest of your content.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p>Jupyter Book uses <a class="reference external" href="https://jupytext.readthedocs.io/en/latest/">Jupytext</a> to convert text-based files to notebooks, and can support <a class="reference external" href="https://jupyterbook.org/file-types/jupytext.html">many other text-based notebook files</a>.</p>
-</div>
-</section>
-<section id="create-a-notebook-with-myst-markdown">
-<h2>Create a notebook with MyST Markdown<a class="headerlink" href="#create-a-notebook-with-myst-markdown" title="Link to this heading">#</a></h2>
-<p>MyST Markdown notebooks are defined by two things:</p>
-<ol class="arabic simple">
-<li><p>YAML metadata that is needed to understand if / how it should convert text files to notebooks (including information about the kernel needed).
-See the YAML at the top of this page for example.</p></li>
-<li><p>The presence of <code class="docutils literal notranslate"><span class="pre">{code-cell}</span></code> directives, which will be executed with your book.</p></li>
-</ol>
-<p>That’s all that is needed to get started!</p>
-</section>
-<section id="quickly-add-yaml-metadata-for-myst-notebooks">
-<h2>Quickly add YAML metadata for MyST Notebooks<a class="headerlink" href="#quickly-add-yaml-metadata-for-myst-notebooks" title="Link to this heading">#</a></h2>
-<p>If you have a markdown file and you’d like to quickly add YAML metadata to it, so that Jupyter Book will treat it as a MyST Markdown Notebook, run the following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span><span class="o">-</span><span class="n">book</span> <span class="n">myst</span> <span class="n">init</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">markdownfile</span><span class="o">.</span><span class="n">md</span>
-</pre></div>
-</div>
-</section>
-</section>
 
     <script type="text/x-thebe-config">
     {
@@ -469,6 +535,24 @@ See the YAML at the top of this page for example.</p></li>
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="Crawling_Berita.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">&lt;no title&gt;</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Preprocessing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Crawling and Preprocessing PTA Management</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -484,11 +568,9 @@ See the YAML at the top of this page for example.</p></li>
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-cell">An example cell</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-notebook-with-myst-markdown">Create a notebook with MyST Markdown</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quickly-add-yaml-metadata-for-myst-notebooks">Quickly add YAML metadata for MyST Notebooks</a></li>
+    <ul class="simple visible nav section-nav flex-column">
 </ul>
+
   </nav></div>
 
 </div></div>
